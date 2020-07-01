@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: client-config
+  labels:
+    app: client
+data:
+  REACT_APP_AirPollution: http://server-side:5000
+  REACT_APP_GoogleBluePinURL: http://maps.google.com/mapfiles/ms/icons/blue-dot.png

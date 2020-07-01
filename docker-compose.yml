@@ -1,0 +1,45 @@
+version: '2'
+services:
+  client:
+    image: client:latest
+    build: ./client-side
+    ports:
+      - 3000:3000
+    env_file: ./client-side/.env
+    depends_on:
+      - server
+    links:
+      - server
+  server:
+    image: server:latest
+    build: ./server-side
+    env_file: ./server-side/.env
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+      - rabbitmq
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=airquality
+      - POSTGRES_PASSWORD=airquality
+      - POSTGRES_DB=airquality
+  rabbitmq:
+    image: rabbitmq:3.7.21
+    ports:
+      - 5672:5672
+  server-rabbitmq:
+    image: server:latest
+    build: ./server-side
+    env_file: ./server-side/.env
+    ports:
+      - 5001:5001
+    depends_on:
+      - postgres
+      - rabbitmq
+    command: sh -c "python populate_database.py && rm *.json && rm -rf datasets/ && rm populate_database.py && celery -A main.celery worker --pool=eventlet"
+    

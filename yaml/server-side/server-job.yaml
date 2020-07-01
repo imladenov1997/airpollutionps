@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: server-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: serverjob
+        image: localhost:5000/server:1.0
+        imagePullPolicy: Never
+        command: ["python", "populate_database.py"]
+        env:
+          - name: USERNAME
+            valueFrom:
+              configMapKeyRef: 
+                key: POSTGRES_USER
+                name: postgres-config
+          - name: PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-config
+          - name: DB
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRES_DB
+                name: postgres-config
+          - name: HOST
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRES_HOST
+                name: server-config
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                key: POSTGRES_PORT
+                name: server-config
+          - name: BROKER_URL
+            valueFrom:
+              configMapKeyRef:
+                key: RABBITMQ_BROKER_URL
+                name: server-config
+          - name: RESULT_BACKEND
+            valueFrom:
+              configMapKeyRef:
+                key: RABBITMQ_RESULT_BACKEND
+                name: server-config
+      restartPolicy: Never
+  backoffLimit: 4

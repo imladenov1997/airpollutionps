@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq
+spec:
+  serviceName: rabbitmq
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      name: rabbitmq
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3.7.21
+          imagePullPolicy: Always
+          ports:
+          - name: http
+            protocol: TCP
+            containerPort: 35672
+          - name: amqp
+            protocol: TCP
+            containerPort: 5672
+          envFrom:
+            - configMapRef:
+                name: rabbitmq-config
+          volumeMounts:
+            - name: rabbitmq-storage
+              mountPath: /var/lib/rabbitmq
+  volumeClaimTemplates:
+    - metadata:
+        name: rabbitmq-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources: 
+          requests:
+            storage: 5Gi
+  selector:
+    matchLabels:
+      app: rabbitmq
+      
+          

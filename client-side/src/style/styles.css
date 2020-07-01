@@ -1,0 +1,49 @@
+:local(.routerButton) {
+    margin: 5px;
+}
+
+:local(.pollutionList) {
+    margin: 1%;
+    max-height: 70%;
+    overflow: scroll;
+}
+
+:local(.coordinatesList) {
+    margin: 1%;
+    max-height: 210px;
+    overflow: scroll;
+}
+
+:local(.modelsList) {
+    margin: 1%;
+    max-height: 50%;
+    overflow: scroll;
+}
+
+:local(.dateTimePicker) {
+    margin: 1%;
+    max-height: 200px;
+}
+
+:local(.dateTimeSlider) {
+    margin-top: "25px"; 
+    margin-bottom: "25px";
+    margin-left: "5px"; 
+    margin-right: "5px"
+}
+
+:local(.pollutionInfo) {
+    margin: 1%;
+    max-height: 200px;
+    max-width: 450px;
+    border-width: 1px;
+    border-style: round;
+}
+
+:local(.modelButtons) {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+

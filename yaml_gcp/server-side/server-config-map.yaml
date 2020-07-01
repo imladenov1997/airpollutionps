@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: server-config
+  labels:
+    app: server
+data:
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
+  RABBITMQ_BROKER_URL: amqp://airquality:airquality@rabbitmq:5672
+  RABBITMQ_RESULT_BACKEND: amqp://airquality:airquality@rabbitmq:5672

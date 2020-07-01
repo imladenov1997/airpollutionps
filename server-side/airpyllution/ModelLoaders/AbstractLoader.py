@@ -1,0 +1,2 @@
+class AbstractLoader:
+    pass

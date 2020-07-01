@@ -1,0 +1,38 @@
+{
+    "weather": {
+        "Date": "date",
+        "Time": "time",
+        "Temperature": "tempC",
+        "Precipitation": "precipMM",
+        "Humidity": "humidity",
+        "WindSpeed": "windspeedKmph"
+    },
+    "weatherDatasets": "./datasets/weather.csv",
+    "weatherFormat": {
+        "Date": "%Y-%m-%d",
+        "Time": "24H"
+    },
+    "pollutant": {
+        "Date": "Date",
+        "Time": "time",
+        "Pollutant": "PM10"
+    },
+    "pollutantDatasets": "./datasets/SA33_2018.csv",
+    "pollutantFormat": {
+        "Date": "%d-%m-%Y",
+        "Time": "24H"
+    },
+    "Date": "%d-%m-%Y",
+    "Time": "%H:%M",
+    "predictionFile": "./datasets/predictions.json",
+    "predictionLocation": {
+        "Longitude": 0,
+        "Latitude": 0
+    },
+    "persistence": {
+        "modelName": "cnn"
+    },
+    "loadedModel": {
+        "modelName": "cnn"
+    }
+}

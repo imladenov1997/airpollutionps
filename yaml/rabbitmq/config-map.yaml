@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config
+  labels:
+    app: rabbitmq
+data:
+  RABBITMQ_VM_MEMORY_HIGH_WATERMARK: "0.6"
+  RABBITMQ_CLUSTER_PARTITION_HANDLING: pause_minority
+  RABBITMQ_DEFAULT_USER: airquality
+  RABBITMQ_DEFAULT_PASS: airquality

@@ -1,0 +1,9 @@
+Following files were generated with npx create-react-app command for creating React Application:
+./package.json
+./public/*
+./src/serviceWorker.js
+./src/index.js
+./src/App.js
+./src/App.test.js
+./src/style/App.css
+./src/style/index.css

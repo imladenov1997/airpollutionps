@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-rabbitmq
+spec:
+  template:
+    metadata:
+      labels:
+        app: server-rabbitmq
+    spec:
+      containers:
+        - name: server-rabbitmq
+          image: gcr.io/airpollutionsystem/server:v1
+          command: 
+            - "sh"
+            - "-c"
+            - "celery -A main.celery worker --pool=eventlet"
+          ports: 
+            - containerPort: 5001
+          env:
+            - name: USERNAME
+              valueFrom:
+                configMapKeyRef: 
+                  key: POSTGRES_USER
+                  name: postgres-config
+            - name: PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: postgres-config
+            - name: DB
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_DB
+                  name: postgres-config
+            - name: HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_HOST
+                  name: server-config
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PORT
+                  name: server-config
+            - name: BROKER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_BROKER_URL
+                  name: server-config
+            - name: RESULT_BACKEND
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_RESULT_BACKEND
+                  name: server-config
+  selector:
+    matchLabels:
+      app: server-rabbitmq
+            
+          

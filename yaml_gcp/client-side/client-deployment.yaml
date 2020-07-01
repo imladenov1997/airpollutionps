@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-side
+spec:
+  template:
+    metadata:
+      labels:
+        app: client-side
+    spec:
+      containers:
+        - name: client-side
+          image: gcr.io/airpollutionsystem/client:v1
+          ports: 
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_AirPollution
+              valueFrom:
+                configMapKeyRef: 
+                  key: REACT_APP_AirPollution
+                  name: client-config
+            - name: REACT_APP_GoogleApiKey
+              valueFrom:
+                secretKeyRef: 
+                  key: google_api_key
+                  name: client-keys
+            - name: REACT_APP_GoogleBluePinURL
+              valueFrom:
+                configMapKeyRef: 
+                  key: REACT_APP_GoogleBluePinURL
+                  name: client-config
+  selector:
+    matchLabels:
+      app: client-side
+            
+          
