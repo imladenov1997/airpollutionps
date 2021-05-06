@@ -1,6 +1,6 @@
 celery==4.2.1
 flask==1.0.2
-flask-cors==3.0.7
+flask-cors==3.0.9
 gpy==1.9.6
 keras==2.2.4
 matplotlib==3.0.1
