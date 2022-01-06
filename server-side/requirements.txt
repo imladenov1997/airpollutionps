@@ -1,4 +1,4 @@
-celery==4.2.1
+celery==5.2.2
 flask==1.0.2
 flask-cors==3.0.7
 gpy==1.9.6
